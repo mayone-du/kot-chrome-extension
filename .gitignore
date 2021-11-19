@@ -38,3 +38,6 @@ yarn-error.log*
 
 # wasm
 /wasm/target
+
+# extensions
+extensions/dist

@@ -1,7 +1,13 @@
-import type { AppProps } from "next/app";
+import type { CustomAppProps } from "next/app";
+import { memo } from "react";
+import "tailwindcss/tailwind.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
+const App = memo((props: CustomAppProps) => {
+  const getLayout = props.Component.getLayout || ((page) => page);
 
-export default MyApp;
+  return <>{getLayout(<props.Component {...props.pageProps} />)}</>;
+});
+
+export default App;
+
+App.displayName = "App";
