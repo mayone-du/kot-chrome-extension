@@ -6,12 +6,14 @@ module.exports = {
   swcMinify: true,
   assetPrefix: "./",
   pageExtensions: ["page.tsx", "page.ts"],
-  webpack: (config) => {
-    entry: "./src/scripts/content.ts";
-    output: {
-      filename: "content.js";
-      path: path.resolve(__dirname, "dist");
-    }
-    return config;
-  },
+  // webpack: (config) => {
+  //   config.module.rules.push({
+  //     entry: "./src/scripts/content.ts",
+  //     output: {
+  //       filename: "content.js",
+  //       path: path.resolve(__dirname, "dist"),
+  //     },
+  //   });
+  //   return config;
+  // },
 };
