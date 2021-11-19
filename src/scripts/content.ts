@@ -1,4 +1,4 @@
-console.log('Hello World!');
+console.log(chrome);
 
 export { };
 

@@ -5,5 +5,14 @@
   "description": "KOT Chrome Extention",
   "action": {
     "default_popup": "./dist/index.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["./dist/content.js"]
+    }
+],
+  "permisions": [
+    "tabs"
+  ]
 }
