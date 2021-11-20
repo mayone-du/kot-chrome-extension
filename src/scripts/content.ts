@@ -1,4 +1,4 @@
-console.log(chrome);
+console.log('call content script');
 
 export { };
 
