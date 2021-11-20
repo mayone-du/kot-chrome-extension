@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+
 import { LayoutErrorBoundary } from "./LayoutErrorBoundary";
 
 export const Layout = (page: NextPage) => {
