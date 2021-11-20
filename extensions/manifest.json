@@ -12,5 +12,8 @@
       "js": ["./dist/content.js"]
     }
   ],
+  "background.serviceWorker": {
+    "scripts": ["./dist/background.js"]
+  },
   "permisions": ["tabs", "activeTab", "scripting"]
 }

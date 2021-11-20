@@ -1,12 +1,15 @@
+// import type { SendMessage } from "src/types/sendMessage";
+
 export const Button: React.VFC = () => {
   const handleClick = () => {
-    chrome.scripting.executeScript({
-      target: { tabId: 2, allFrames: true },
-      func: () => {
-        // eslint-disable-next-line no-console
-        console.log("Button Clicked!!");
-        return;
-      },
+    // chrome.runtime.sendMessage<SendMessage>({ type: "getDocumentBody" }, (res) => {
+    //   // eslint-disable-next-line no-console
+    //   console.log("click res:", res);
+    // });
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      // eslint-disable-next-line no-console
+      console.log("tabs:", tabs);
+      chrome.tabs.sendMessage(tabs[0].id ?? 0, { type: "getDocumentBody" });
     });
   };
   return (
