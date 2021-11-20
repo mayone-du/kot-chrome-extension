@@ -1,4 +1,4 @@
-// import type { SendMessage } from "src/types/sendMessage";
+import type { SendMessage } from "src/types/sendMessage";
 
 export const Button: React.VFC = () => {
   const handleClick = () => {
@@ -7,9 +7,10 @@ export const Button: React.VFC = () => {
     //   console.log("click res:", res);
     // });
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      // eslint-disable-next-line no-console
-      console.log("tabs:", tabs);
-      chrome.tabs.sendMessage(tabs[0].id ?? 0, { type: "getDocumentBody" });
+      chrome.tabs.sendMessage<SendMessage>(tabs[0].id ?? 0, { type: "getDocumentBody" }, (res) => {
+        // eslint-disable-next-line no-console
+        console.log("sendMessage res:", res);
+      });
     });
   };
   return (
