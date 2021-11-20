@@ -22,8 +22,8 @@ const IndexPage: CustomNextPage = () => {
 
       <Button />
 
-      <script defer src="./content.js"></script>
-      <script defer src="./background.js"></script>
+      <script defer src="../content.js"></script>
+      <script defer src="../background.js"></script>
     </div>
   );
 };

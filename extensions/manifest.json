@@ -9,11 +9,11 @@
   "content_scripts": [
     {
       "matches": ["https://*/*"],
-      "js": ["./dist/content.js"]
+      "js": ["content.js"]
     }
   ],
-  "background.serviceWorker": {
-    "scripts": ["./dist/background.js"]
+  "background": {
+    "service_worker": "background.js"
   },
-  "permisions": ["tabs", "activeTab", "scripting"]
+  "permissions": ["tabs", "activeTab", "scripting"]
 }
