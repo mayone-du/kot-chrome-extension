@@ -1,3 +1,7 @@
 fn main() {
-    println!("Hello, world!");
+    calc_avarage();
+}
+
+fn calc_avarage() {
+    println!("avg: {}", 2);
 }
