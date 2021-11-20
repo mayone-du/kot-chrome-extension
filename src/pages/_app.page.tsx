@@ -1,9 +1,14 @@
-import type { CustomAppProps } from "next/app";
-import { memo } from "react";
 import "tailwindcss/tailwind.css";
 
+import type { CustomAppProps } from "next/app";
+import { memo } from "react";
+
 const App = memo((props: CustomAppProps) => {
-  const getLayout = props.Component.getLayout || ((page) => page);
+  const getLayout =
+    props.Component.getLayout ||
+    ((page) => {
+      return page;
+    });
 
   return <>{getLayout(<props.Component {...props.pageProps} />)}</>;
 });

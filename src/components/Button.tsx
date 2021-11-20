@@ -1,7 +1,13 @@
 export const Button: React.VFC = () => {
   const handleClick = () => {
-    // eslint-disable-next-line no-console
-    console.log("call Button component!!", chrome);
+    chrome.scripting.executeScript({
+      target: { tabId: 2, allFrames: true },
+      func: () => {
+        // eslint-disable-next-line no-console
+        console.log("Button Clicked!!");
+        return;
+      },
+    });
   };
   return (
     <button onClick={handleClick} className="block p-2 m-2 mx-auto rounded border">

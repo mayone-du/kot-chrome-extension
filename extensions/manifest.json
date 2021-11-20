@@ -11,8 +11,6 @@
       "matches": ["https://*/*"],
       "js": ["./dist/content.js"]
     }
-],
-  "permisions": [
-    "tabs"
-  ]
+  ],
+  "permisions": ["tabs", "activeTab", "scripting"]
 }
