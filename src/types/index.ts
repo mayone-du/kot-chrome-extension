@@ -2,7 +2,7 @@ export type SendMessage = {
   type: "getWorkData";
 };
 
-export type WorkTimeAvarage = {
+export type HourAndMinutes = {
   hour: number;
   minutes: number;
 };
@@ -13,6 +13,7 @@ export type Response = {
   stdMonthWorkTime: number;
   stdMonthWorkDays: number;
   remainingDays: number;
-  workTimeAvarage: WorkTimeAvarage;
+  workTimeAvarage: HourAndMinutes;
   remainingWorkTimeMinutes: number;
+  remainingWorkTimes: HourAndMinutes;
 };

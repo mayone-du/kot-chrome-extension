@@ -6,7 +6,7 @@ import { ONE_HOUR_MINUTES } from "../constants/ONE_HOUR_MINUTES";
 import { calcWorkAvarage } from "../functions/calcWorkAvarage";
 
 // TODO: KOTは8.00で8時間、7.55で7時間55分という感じで表示されることの考慮
-
+// TODO: リファクタ
 chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse) => {
   // KOTのDOMからコンテンツを取得して返却
   if (request.type === "getWorkData") {
@@ -45,10 +45,15 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
     // 8, 8.20 → 480, 500 | result: 490
     const workTimeAvarage = calcWorkAvarage(workTimeMinutes, workDayCount);
 
-    // 残りの1日あたりに働けば良い平均勤務時間
-    const remainingWorkTimeMinutes =
-      Math.round(((stdMonthWorkTime * ONE_HOUR_MINUTES - workTimeMinutes) / remainingDays) * 100) /
-      100;
+    // 残りの1日あたりに働けば良い平均勤務分数
+    const remainingWorkTimeMinutes = Math.ceil(
+      (stdMonthWorkTime * ONE_HOUR_MINUTES - workTimeMinutes) / remainingDays,
+    );
+
+    const remainingWorkTimes = {
+      hour: Math.floor(remainingWorkTimeMinutes / ONE_HOUR_MINUTES),
+      minutes: Math.ceil(remainingWorkTimeMinutes % ONE_HOUR_MINUTES),
+    };
 
     const response: Response = {
       workDayCount,
@@ -58,6 +63,7 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
       remainingDays,
       workTimeAvarage,
       remainingWorkTimeMinutes,
+      remainingWorkTimes,
     };
 
     sendResponse(response);
