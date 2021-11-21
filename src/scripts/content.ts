@@ -2,6 +2,7 @@ import type { Response, SendMessage } from "src/types";
 
 // パスの解決ができなくなるため、絶対パスではなく相対パスで指定
 import { ONE_DAY_WORK_TIME } from "../constants/ONE_DAY_WORK_TIME";
+import { ONE_HOUR_MINUTES } from "../constants/ONE_HOUR_MINUTES";
 import { calcWorkAvarage } from "../functions/calcWorkAvarage";
 
 // TODO: KOTは8.00で8時間、7.55で7時間55分という感じで表示されることの考慮
@@ -12,8 +13,22 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
     // すでに働いた日数
     const workDayCount = Number(document.querySelector("div.work_count")?.textContent);
 
-    // すでに働いた時間
+    // すでに働いた時間と分数 10時間20分の場合→10.20 で取得される
     const workTime = Number(document.querySelector("td.fixed_work")?.textContent);
+    // すでに働いた分数
+    const workTimeMinutes = workTime
+      .toString()
+      .split(".")
+      .map((v, index) => {
+        if (index === 0) {
+          return Number(v) * ONE_HOUR_MINUTES;
+        } else {
+          return Number(v);
+        }
+      })
+      .reduce((current, next) => {
+        return current + next;
+      });
 
     // その月に働くはずである時間
     const stdMonthWorkTime = Number(
@@ -27,20 +42,22 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
     const remainingDays = stdMonthWorkDays - workDayCount;
 
     // 平均で働いている時間
-    const workTimeAvarage = calcWorkAvarage(workTime, workDayCount);
+    // 8, 8.20 → 480, 500 | result: 490
+    const workTimeAvarage = calcWorkAvarage(workTimeMinutes, workDayCount);
 
     // 残りの1日あたりに働けば良い平均勤務時間
-    const remainingWorkTime =
-      Math.round(((stdMonthWorkTime - workTime) / remainingDays) * 100) / 100;
+    const remainingWorkTimeMinutes =
+      Math.round(((stdMonthWorkTime * ONE_HOUR_MINUTES - workTimeMinutes) / remainingDays) * 100) /
+      100;
 
     const response: Response = {
       workDayCount,
-      workTime,
+      workTimeMinutes,
       stdMonthWorkTime,
       stdMonthWorkDays,
       remainingDays,
       workTimeAvarage,
-      remainingWorkTime,
+      remainingWorkTimeMinutes,
     };
 
     sendResponse(response);

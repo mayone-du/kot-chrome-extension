@@ -8,8 +8,6 @@ export const Table: React.VFC = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const currentTab = tabs[0];
       if (!currentTab.url?.includes(KOT_URL)) return;
-      // eslint-disable-next-line no-console
-      console.log("currentTab: ", currentTab);
       chrome.tabs.sendMessage<SendMessage>(
         currentTab.id ?? 0,
         { type: "getWorkData" },
@@ -28,11 +26,11 @@ export const Table: React.VFC = () => {
         <tbody>
           <tr>
             <td>平均勤務時間</td>
-            <td>{res.workTimeAvarage}</td>
+            <td>{`${res.workTimeAvarage.hour}時間 ${res.workTimeAvarage.minutes}分`}</td>
           </tr>
           <tr>
             <td>残りの1日あたり平均勤務時間</td>
-            <td>{res.remainingWorkTime}</td>
+            <td>{res.remainingWorkTimeMinutes}</td>
           </tr>
         </tbody>
       </table>
