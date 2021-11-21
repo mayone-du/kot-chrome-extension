@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
+import { KOT_URL } from "src/constants/KOT_URL";
 import type { Response, SendMessage } from "src/types";
 
 export const Table: React.VFC = () => {
   const [res, setRes] = useState<Response | null>(null);
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const currentTab = tabs[0];
+      if (!currentTab.url?.includes(KOT_URL)) return;
+      // eslint-disable-next-line no-console
+      console.log("currentTab: ", currentTab);
       chrome.tabs.sendMessage<SendMessage>(
-        tabs[0].id ?? 0,
+        currentTab.id ?? 0,
         { type: "getWorkData" },
         (res: Response) => {
           setRes(res);
