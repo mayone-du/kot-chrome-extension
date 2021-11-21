@@ -2,6 +2,10 @@ export type SendMessage = {
   type: "getWorkData";
 };
 
+export type SendGetStorage = {
+  type: "getStorage";
+};
+
 export type HourAndMinutes = {
   hour: number;
   minutes: number;
