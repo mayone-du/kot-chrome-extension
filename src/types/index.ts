@@ -9,4 +9,5 @@ export type Response = {
   stdMonthWorkDays: number;
   remainingDays: number;
   workTimeAvarage: number;
+  remainingWorkTime: number;
 };

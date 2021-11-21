@@ -3,10 +3,10 @@ import dynamic from "next/dynamic";
 import { Layout } from "src/layout";
 
 // chrome APIを使用するためdynamic importし、browser側でのみ読み込まれるようにする
-const Button = dynamic(
+const Table = dynamic(
   async () => {
-    const module = await import("src/components/Button");
-    return module.Button;
+    const module = await import("src/components/Table");
+    return module.Table;
   },
   {
     ssr: false,
@@ -19,9 +19,9 @@ const Button = dynamic(
 const IndexPage: CustomNextPage = () => {
   return (
     <div>
-      <h1 className="px-2 text-2xl font-bold">KOT Chrome Extention</h1>
+      <h1 className="text-2xl font-bold whitespace-nowrap">KOT Chrome Extention</h1>
 
-      <Button />
+      <Table />
 
       <script defer src="../content.js"></script>
       <script defer src="../background.js"></script>

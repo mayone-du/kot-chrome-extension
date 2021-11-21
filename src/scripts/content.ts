@@ -27,6 +27,9 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
     // 平均で働いている時間
     const workTimeAvarage = calcWorkAvarage(workTime, workDayCount);
 
+    // 残りの1日あたりに働けば良い平均勤務時間
+    const remainingWorkTime = (stdMonthWorkTime - workTime) / remainingDays;
+
     const response: Response = {
       workDayCount,
       workTime,
@@ -34,6 +37,7 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
       stdMonthWorkDays,
       remainingDays,
       workTimeAvarage,
+      remainingWorkTime,
     };
 
     sendResponse(response);
