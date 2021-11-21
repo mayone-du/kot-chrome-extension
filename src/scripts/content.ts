@@ -1,6 +1,8 @@
-import { ONE_DAY_WORK_TIME } from "src/constants/ONE_DAY_WORK_TIME";
-import { calcWorkAvarage } from "src/functions/calcWorkAvarage";
 import type { Response, SendMessage } from "src/types";
+
+// パスの解決ができなくなるため、絶対パスではなく相対パスで指定
+import { ONE_DAY_WORK_TIME } from "../constants/ONE_DAY_WORK_TIME";
+import { calcWorkAvarage } from "../functions/calcWorkAvarage";
 
 chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse) => {
   // KOTのDOMからコンテンツを取得して返却
