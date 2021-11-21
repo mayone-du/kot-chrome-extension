@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener((request: SendMessage, sender, sendResponse
     // 8, 8.20 → 480, 500 | result: 490
     const workTimeAvarage = calcWorkAvarage(workTimeMinutes, workDayCount);
 
-    // 残りの1日あたりに働けば良い平均勤務分数
+    // 残りの1日あたりに働けば良い平均勤務分数 下回るのが怖いので切り上げ
     const remainingWorkTimeMinutes = Math.ceil(
       (stdMonthWorkTime * ONE_HOUR_MINUTES - workTimeMinutes) / remainingDays,
     );

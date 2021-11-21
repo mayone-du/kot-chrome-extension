@@ -7,8 +7,9 @@ import { ONE_HOUR_MINUTES } from "../constants/ONE_HOUR_MINUTES";
 
 // TODO: 理想はtypeで使用するか、直接wasm使いたい → const calcWorkAvarage: typeof calc_work_avarage = ...
 export const calcWorkAvarage = (workTimeMinutes: number, workDayCount: number): HourAndMinutes => {
-  const hour = Math.floor(Math.round(workTimeMinutes / workDayCount) / ONE_HOUR_MINUTES);
-  const minutes = Math.ceil(Math.round(workTimeMinutes / workDayCount) % ONE_HOUR_MINUTES);
+  const hour = Math.floor(workTimeMinutes / workDayCount / ONE_HOUR_MINUTES);
+  // 下回るのが怖いから切り捨て
+  const minutes = Math.floor((workTimeMinutes / workDayCount) % ONE_HOUR_MINUTES);
 
   return { hour, minutes };
 };
