@@ -25,6 +25,7 @@ wasm-pack build
 ## TODO
 
 - 確認するたびにビルド（npm run export）しないといけなくて、開発効率が悪い
+- 1 度 chrome.storage.local から get すると値が null 担ってしまう
 
 ## 機能
 

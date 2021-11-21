@@ -67,13 +67,17 @@ chrome.runtime.onMessage.addListener(
         remainingWorkTimes,
       };
 
-      chrome.storage.local.set(response);
+      (async () => {
+        await chrome.storage.local.set({ response: JSON.stringify(response) });
+      })();
       sendResponse(response);
     } else if (request.type === "getStorage") {
       (async () => {
         const res = await chrome.storage.local.get("response");
-        sendResponse(res);
+        const parsedRes = await JSON.parse(res.response);
+        sendResponse(parsedRes);
       })();
+      return true;
     }
   },
 );

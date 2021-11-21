@@ -12,7 +12,7 @@ export const Table: React.VFC = () => {
         chrome.tabs.sendMessage<SendGetStorage>(
           currentTabId,
           { type: "getStorage" },
-          (res: Response) => {
+          async (res: Response) => {
             setRes(res);
           },
         );
