@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { calcWorkAvarage } from "src/functions/calcWorkAvarage";
-import type { SendMessage, SendResponse } from "src/types/sendMessage";
+import type { Response, SendMessage } from "src/types";
 
 export const Button: React.VFC = () => {
   const [timeAvg, setTimeAvg] = useState<number | null>(null);
@@ -9,11 +8,8 @@ export const Button: React.VFC = () => {
       chrome.tabs.sendMessage<SendMessage>(
         tabs[0].id ?? 0,
         { type: "getWorkData" },
-        (res: SendResponse) => {
-          const result = calcWorkAvarage(res.workTime, res.workDayCount);
-          // eslint-disable-next-line no-console
-          console.log(result, res);
-          setTimeAvg(result);
+        (res: Response) => {
+          setTimeAvg(res.workTimeAvarage);
         },
       );
     });
