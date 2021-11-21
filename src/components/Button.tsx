@@ -11,6 +11,8 @@ export const Button: React.VFC = () => {
         { type: "getWorkData" },
         (res: SendResponse) => {
           const result = calcWorkAvarage(res.workTime, res.workDayCount);
+          // eslint-disable-next-line no-console
+          console.log(result, res);
           setTimeAvg(result);
         },
       );
