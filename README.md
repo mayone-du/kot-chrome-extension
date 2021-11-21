@@ -6,7 +6,7 @@
 npm run export
 ```
 
-で/extentions/dist に出力される
+で/extensions/dist に出力される
 
 chrome.tabs...のような chromeAPI を使用したい場合は、dynamic import で SSR を false にしないといけない。
 

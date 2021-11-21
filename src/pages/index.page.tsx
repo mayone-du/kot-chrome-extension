@@ -19,7 +19,7 @@ const Table = dynamic(
 const IndexPage: CustomNextPage = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold whitespace-nowrap">KOT Chrome Extention</h1>
+      <h1 className="text-2xl font-bold whitespace-nowrap">KOT Chrome extension</h1>
 
       <Table />
 

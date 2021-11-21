@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "version": "0.1",
-  "name": "KOT Chrome Extention",
-  "description": "KOT Chrome Extention",
+  "name": "KOT Chrome extension",
+  "description": "KOT Chrome extension",
   "action": {
     "default_popup": "./dist/index.html"
   },

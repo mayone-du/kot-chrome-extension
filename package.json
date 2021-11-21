@@ -1,5 +1,5 @@
 {
-  "name": "kot-chrome-extention",
+  "name": "kot-chrome-extension",
   "private": true,
   "scripts": {
     "bundle": "webpack build --mode production --config ./webpack/webpack.config.js",
