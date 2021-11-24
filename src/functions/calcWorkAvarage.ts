@@ -1,8 +1,7 @@
 // Chrome拡張ではWASMサポートが完璧ではないため、まだ型としてしか使用しない
 import type { HourAndMinutes } from "src/types";
-// eslint-disable-next-line
-import type { calc_work_avarage } from "wasm/pkg/wasm_bg";
 
+// import type { calc_work_avarage } from "wasm/pkg/wasm_bg";
 import { ONE_HOUR_MINUTES } from "../constants/ONE_HOUR_MINUTES";
 
 // TODO: 理想はtypeで使用するか、直接wasm使いたい → const calcWorkAvarage: typeof calc_work_avarage = ...
