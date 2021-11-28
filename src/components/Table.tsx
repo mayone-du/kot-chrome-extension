@@ -41,6 +41,14 @@ export const Table: React.VFC = () => {
             <td>残りの1日あたり平均勤務時間</td>
             <td>{`${res.remainingWorkTimes.hour}時間 ${res.remainingWorkTimes.minutes}分`}</td>
           </tr>
+          <tr>
+            <td>今月の残りの勤務時間</td>
+            <td>{`${res.remainingDays}日で ${res.remainingWorkTimes.hour}時間${res.remainingWorkTimes.minutes}分`}</td>
+          </tr>
+          <tr>
+            <td>今月の貯金 or マイナス時間</td>
+            <td>{`${res.roomMinutes}分`}</td>
+          </tr>
         </tbody>
       </table>
     </div>

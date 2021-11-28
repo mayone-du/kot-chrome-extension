@@ -20,4 +20,5 @@ export type Response = {
   workTimeAvarage: HourAndMinutes;
   remainingWorkTimeMinutes: number;
   remainingWorkTimes: HourAndMinutes;
+  roomMinutes: number;
 };

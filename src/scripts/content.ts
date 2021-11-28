@@ -1,7 +1,7 @@
 import type { Response, SendGetStorage, SendMessage } from "src/types";
 
 // パスの解決ができなくなるため、絶対パスではなく相対パスで指定
-import { ONE_DAY_WORK_TIME } from "../constants/ONE_DAY_WORK_TIME";
+import { ONE_DAY_WORK_HOURS } from "../constants/ONE_DAY_WORK_HOURS";
 import { ONE_HOUR_MINUTES } from "../constants/ONE_HOUR_MINUTES";
 import { calcWorkAvarage } from "../functions/calcWorkAvarage";
 
@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(
       );
 
       // その月に働くはずである日数
-      const stdMonthWorkDays = stdMonthWorkTime / ONE_DAY_WORK_TIME;
+      const stdMonthWorkDays = stdMonthWorkTime / ONE_DAY_WORK_HOURS;
 
       // 残りの出勤日数
       const remainingDays = stdMonthWorkDays - workDayCount;
@@ -56,6 +56,12 @@ chrome.runtime.onMessage.addListener(
         minutes: Math.ceil(remainingWorkTimeMinutes % ONE_HOUR_MINUTES),
       };
 
+      // 貯金（時間） マイナスの場合はマイナスで返す
+      const roomMinutes =
+        remainingWorkTimes.hour === ONE_DAY_WORK_HOURS
+          ? remainingWorkTimes.minutes * remainingDays
+          : -(ONE_HOUR_MINUTES - remainingWorkTimes.minutes) * remainingDays;
+
       const response: Response = {
         workDayCount,
         workTimeMinutes,
@@ -65,6 +71,7 @@ chrome.runtime.onMessage.addListener(
         workTimeAvarage,
         remainingWorkTimeMinutes,
         remainingWorkTimes,
+        roomMinutes,
       };
 
       (async () => {
