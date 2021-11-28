@@ -51,6 +51,7 @@ chrome.runtime.onMessage.addListener(
         (stdMonthWorkTime * ONE_HOUR_MINUTES - workTimeMinutes) / remainingDays,
       );
 
+      // 残りの働く時間
       const remainingWorkTimes = {
         hour: Math.floor(remainingWorkTimeMinutes / ONE_HOUR_MINUTES),
         minutes: Math.ceil(remainingWorkTimeMinutes % ONE_HOUR_MINUTES),
@@ -58,9 +59,9 @@ chrome.runtime.onMessage.addListener(
 
       // 貯金（時間） マイナスの場合はマイナスで返す
       const roomMinutes =
-        remainingWorkTimes.hour === ONE_DAY_WORK_HOURS
-          ? remainingWorkTimes.minutes * remainingDays
-          : -(ONE_HOUR_MINUTES - remainingWorkTimes.minutes) * remainingDays;
+        workTimeAvarage.hour === ONE_DAY_WORK_HOURS
+          ? workTimeAvarage.minutes * workDayCount
+          : -(ONE_HOUR_MINUTES - workTimeAvarage.minutes) * workDayCount;
 
       const response: Response = {
         workDayCount,

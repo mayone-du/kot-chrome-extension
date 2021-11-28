@@ -43,7 +43,9 @@ export const Table: React.VFC = () => {
           </tr>
           <tr>
             <td>今月の残りの勤務時間</td>
-            <td>{`${res.remainingDays}日で ${res.remainingWorkTimes.hour}時間${res.remainingWorkTimes.minutes}分`}</td>
+            <td>{`${res.remainingDays}日で ${res.remainingDays * res.remainingWorkTimes.hour}時間${
+              res.remainingDays * res.remainingWorkTimes.minutes
+            }分`}</td>
           </tr>
           <tr>
             <td>今月の貯金 or マイナス時間</td>
